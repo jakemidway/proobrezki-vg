@@ -701,6 +701,44 @@ h3 {
   z-index: 1;
 }
 
+.btn {
+  width: 224px;
+  height: 58px;
+  background: #EBB018;
+  border: 2px solid #EBB018;
+  border-radius: 4px;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+  font-family: OpenSansBold, serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.btn a {
+  width: 100%;
+  height: 100%;
+  color: #413431;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.btn:hover {
+  background-color: white;
+  border: 2px solid #413431;
+}
+
 .container {
   min-width: 320px;
   width: 1170px;
