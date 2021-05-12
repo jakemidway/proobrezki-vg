@@ -1,0 +1,14 @@
+@mixin imgPath($name, $size, $repeat, $position) {
+      background-image: url("./../images/#{$name}");
+      background-size: #{$size};
+      background-repeat: #{$repeat};
+      background-position: #{$position};
+}
+
+@mixin multiBGI($name1, $position1, $repeat1, $size1,
+      $name2, $position2, $repeat2, $size2) {
+      background: url("./../assets/img/#{$name1}") $position1 $repeat1,
+      url("./../assets/img/#{$name2}") $position2 $repeat2;
+      background-size: #{$size1},
+      #{$size2};
+}

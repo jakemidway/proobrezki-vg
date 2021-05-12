@@ -1,53 +1,63 @@
-// SCSS миксин для подключения шрифтов
-@mixin font($font_name, $file_name, $weight, $style) {
-
-    @font-face {
-        font-family: $font_name;
-        font-display: swap;
-        src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
-        font-weight: #{$weight};
-        font-style: #{$style};
-    }
-}
-    
+@import "normalize";
 @import "fonts";
+@import "variables";
 
 
 
-
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-
-
-
-html{
-    background-color: #fff;
+html {
+    font-family: 'OpenSansRegular', serif;
+    font-size: 10px;
+    color: $colorText;
 }
 
-body{
-    font-family: "muli-regular";
-    font-size: 15px;
-    display: flex;
-    @media (max-width: 1024px) {
-        width: 1024px;
-        font-size: 20px;
+a {
+    text-decoration: none;
+    color: $colorBtn;
+}
+
+li {
+    list-style: none;
+}
+
+h2 {
+    font-family: 'RobotoBlack', sans-serif;
+    font-size: 3.6rem;
+    line-height: 3.6rem;
+}
+
+h3 {
+    font-family: 'RobotoBlack', sans-serif;
+    font-size: 2.2rem;
+}
+
+//blocks
+@import "./blocks/header";
+// @import "blocks/btnDown";
+// @import "chiefslider";
+
+// @import "./blocks/btn";
+// @import "blocks/services";
+// @import "blocks/examples";
+// @import "blocks/coworking";
+// @import "blocks/connection";
+// @import "blocks/gallery";
+// @import "blocks/footer";
+// @import "blocks/contacts";
+
+.container {
+    min-width: 320px;
+    width: 1170px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 1200px) {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
     }
-}
-
-h1{
-    font-size: 40px;
-    @media (max-width: 1024px) {
-        font-size: 30px;
-    }
-}
-
-h3{
-    font-style: italic;
-}
-header{
-    height: 100vh;
-    background: url("./../images/test.jpg");
 }

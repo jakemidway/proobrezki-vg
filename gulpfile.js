@@ -20,9 +20,7 @@ const webp = require("gulp-webp");
 const webphtml = require("gulp-webp-html");
 const webpcss = require("gulp-webpcss");
 const svgSprite = require("gulp-svg-sprite");
-const ttf2woff = require("gulp-ttf2woff");
-const ttf2woff2 = require("gulp-ttf2woff2");
-const fonter = require("gulp-fonter");
+
 
 /* Пути */
 const distPath = "dist/";
@@ -35,26 +33,26 @@ let fs = require("fs");
 let path = {
 	build: {
 		/* В эти папки будут собираться файлы */
-		html:  distPath,
-		css:   distPath + "assets/css/",
-		js:    distPath + "assets/js/",
-		img:   distPath + "assets/images/",
+		html: distPath,
+		css: distPath + "assets/css/",
+		js: distPath + "assets/js/",
+		img: distPath + "assets/images/",
 		fonts: distPath + "assets/fonts/",
 	},
 	/* Исходные файлы. С этими файлами мы будем работать */
 	src: {
-		html:  [srcPath + "*.html", "!" + srcPath + "_*.html"],
-		scss:  srcPath + "assets/scss/style.scss",
-		js:    srcPath + "assets/js/script.js",
-		img:   srcPath + "assets/images/**/*.{jpg,png,svg,gif,ico,webp}",
-		fonts: srcPath + "assets/fonts/*.ttf",
+		html: [srcPath + "*.html", "!" + srcPath + "_*.html"],
+		scss: srcPath + "assets/scss/style.scss",
+		js: srcPath + "assets/js/script.js",
+		img: srcPath + "assets/images/**/*.{jpg,png,svg,gif,ico,webp}",
+		fonts: srcPath + "assets/fonts/**/*.{eot,woff,woff2,ttf,svg}",
 	},
 	/* За этими файлами мы будем следить. При изменении этих файлов бдет перезагружаться браузер */
 	watch: {
-		html:  srcPath + "**/*.html",
-		css:   srcPath + "assets/scss/**/*.scss",
-		js:    srcPath + "assets/js/**/*.js",
-		img:   srcPath + "assets/img/**/*.{jpg,png,svg,gif,ico,webp}"
+		html: srcPath + "**/*.html",
+		css: srcPath + "assets/scss/**/*.scss",
+		js: srcPath + "assets/js/**/*.js",
+		img: srcPath + "assets/img/**/*.{jpg,png,svg,gif,ico,webp}"
 	},
 	clean: "./" + distPath
 }
@@ -156,24 +154,11 @@ function images() {
 
 /* Для шрифтов */
 function fonts() {
-	src(path.src.fonts)
-		.pipe(ttf2woff())
-		.pipe(dest(path.build.fonts));
 	return src(path.src.fonts)
-		.pipe(ttf2woff2())
-		.pipe(dest(path.build.fonts));
+		.pipe(dest(path.build.fonts))
 }
 
 
-
-
-gulp.task('otf2ttf', function () {
-	return gulp.src([srcPath + '/fonts/*.otf'])
-		.pipe(fonter({
-			formats: ['ttf']
-		}))
-		.pipe(dest(srcPath + '/fonts/'));
-})
 
 gulp.task('svgSprite', function () {
 	return gulp.src([srcPath + '/iconsprite/*.svg'])
@@ -199,31 +184,6 @@ function clean() {
 }
 
 
-// JS-функция записи информации в fonts.scss
-function fontsStyle(params) {
-
-	let file_content = fs.readFileSync(srcPath + 'assets/scss/fonts.scss');
-	if (file_content == '') {
-		fs.writeFile(srcPath + 'assets/scss/fonts.scss', '', cb);
-		return fs.readdir(path.build.fonts, function (err, items) {
-			if (items) {
-				let c_fontname;
-				for (var i = 0; i < items.length; i++) {
-					let fontname = items[i].split('.');
-					fontname = fontname[0];
-					if (c_fontname != fontname) {
-						fs.appendFile(srcPath + 'assets/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
-					}
-					c_fontname = fontname;
-				}
-			}
-		})
-	}
-}
-
-function cb() {}
-
-
 
 /* Для слежки за файлами */
 function watchFiles() {
@@ -233,7 +193,7 @@ function watchFiles() {
 	gulp.watch([path.watch.img], images);
 }
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fontsStyle); /* Будет запускаться по команде gulp build */
+let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts)); /* Будет запускаться по команде gulp build */
 let watch = gulp.parallel(build, watchFiles, browserSync); /* Будет запускаться по дефолтной команде gulp */
 
 
@@ -241,7 +201,6 @@ let watch = gulp.parallel(build, watchFiles, browserSync); /* Будет зап�
 
 
 /* Экспорты Tasks */
-exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
 exports.js = js;

@@ -1,1 +1,35 @@
-@include font("muli-regular", "muli-regular", "400", "normal");
+@font-face {
+    font-family: 'OpenSansRegular';
+    src: url("./../fonts/Open_Sans/OpenSans-Regular.ttf");
+    font-style: normal;
+  }
+  @font-face{
+    font-family: 'OpenSansBold';
+    src: url("./../fonts/Open_Sans/OpenSans-Bold.ttf");
+    font-style: normal;
+  }
+  @font-face{
+    font-family: 'OpenSansExtraBold';
+    src: url("./../fonts/Open_Sans/OpenSans-ExtraBold.ttf");
+    font-style: normal;
+  }
+  @font-face{
+    font-family: 'OpenSansItalic';
+    src: url("./../fonts/Open_Sans/OpenSans-Italic.ttf");
+    font-style: normal;
+  }
+  @font-face{
+    font-family: 'OpenSansItalicBold';
+    src: url("./../fonts/Open_Sans/OpenSans-BoldItalic.ttf");
+    font-style: normal;
+  }
+  @font-face{
+    font-family: 'RobotoBlack';
+    src: url("./../fonts/Roboto/Roboto-Black.ttf");
+    font-style: normal;
+  }
+  @font-face{
+    font-family: 'RobotoRegular';
+    src: url("./../fonts/Roboto/Roboto-Regular.ttf");
+    font-style: normal;
+  }
