@@ -1,0 +1,53 @@
+// SCSS миксин для подключения шрифтов
+@mixin font($font_name, $file_name, $weight, $style) {
+
+    @font-face {
+        font-family: $font_name;
+        font-display: swap;
+        src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+        font-weight: #{$weight};
+        font-style: #{$style};
+    }
+}
+    
+@import "fonts";
+
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+html{
+    background-color: #fff;
+}
+
+body{
+    font-family: "muli-regular";
+    font-size: 15px;
+    display: flex;
+    @media (max-width: 1024px) {
+        width: 1024px;
+        font-size: 20px;
+    }
+}
+
+h1{
+    font-size: 40px;
+    @media (max-width: 1024px) {
+        font-size: 30px;
+    }
+}
+
+h3{
+    font-style: italic;
+}
+header{
+    height: 100vh;
+    background: url("./../images/test.jpg");
+}
